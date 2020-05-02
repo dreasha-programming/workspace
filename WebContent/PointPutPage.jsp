@@ -15,6 +15,18 @@
 <title>Point Put Page</title>
 </head>
 <body>
+<%
+if(remainPoint.equals("0")){
+%>
+<%=UserName%> have no points to put.
+<form action="<%=request.getContextPath()%>/MainMenu" method="post">
+	<input type="hidden" name="Id" value="<%=Id%>" />
+	<input type="hidden" name="backFlg" value="1" />
+	<input type="submit" value="Back"></input>
+</form>
+<%
+} else {
+%>
 <%=UserName%> have <%=remainPoint%> points.
 <br>
 How many points do you put?
@@ -33,6 +45,13 @@ How many points do you put?
 		<p>Points:</p>
 		<input type="text" name="txtPutPoint">
 		<input type="submit" name= "btnPutPoint" value="put"/>
-	</form>
+</form>
+<br>
+<form action="<%=request.getContextPath()%>/MainMenu" method="post">
+	<input type="hidden" name="Id" value="<%=Id%>" />
+	<input type="hidden" name="backFlg" value="1" />
+	<input type="submit" value="Back"></input>
+</form>
+<%} %>
 </body>
 </html>

@@ -126,15 +126,14 @@ LABELerror:{
 			update_M_User(Integer.parseInt(id), calcPoint);
 		}
 
-		request.setAttribute("UserName", toUser);
+		//パラメータを画面にセット
+		request.setAttribute("UserName", QueryGet.selectUserNameById(Integer.parseInt(id)));
 		request.setAttribute("calcPoint", String.valueOf(calcPoint));
 		request.setAttribute("Id", id);
 
 		// PointResult にページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("PointResult.jsp");
 		dispatch.forward(request, response);
-
-		//int userId = Integer.valueOf(request.getParameter("UserName"));
 	}
 
 	/*

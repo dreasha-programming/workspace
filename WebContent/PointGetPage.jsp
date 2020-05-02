@@ -21,6 +21,7 @@ if(getPoint.equals("0")){
 <%=UserName%> have no points to get.
 <form action="<%=request.getContextPath()%>/MainMenu" method="post">
 	<input type="hidden" name="Id" value="<%=Id%>" />
+	<input type="hidden" name="backFlg" value="1" />
 	<input type="submit" value="Back"></input>
 </form>
 <%

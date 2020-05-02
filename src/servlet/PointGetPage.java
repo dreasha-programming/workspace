@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sql.QueryGet;
+
 /**
  * Servlet implementation class PointGetPage
  */
@@ -57,10 +59,10 @@ public class PointGetPage extends HttpServlet {
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
 		String pass = "";
-		String 	sqlGet = "select MAX(b.UserName) as UserName, SUM(a.Point) as GetPoint, MAX(b.Point) as RemainPoint " ;
+		String 	sqlGet = "select SUM(a.Point) as GetPoint, MAX(b.Point) as RemainPoint " ;
 				sqlGet = sqlGet + "from T_PointHistory a inner join M_User b on a.ToUserId = b.Id ";
 				sqlGet = sqlGet + "where a.ToUserId = ? and a.UketoriFlg = 0;";
-		String UserName = "";
+		String UserName = QueryGet.selectUserNameById(inputId);
 		int getPoint = 0;
 		int remainPoint = 0;
 
@@ -77,7 +79,6 @@ public class PointGetPage extends HttpServlet {
 			//SELECTを実行する
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				UserName = rs.getString("UserName");
 				getPoint = rs.getInt("GetPoint");
 				remainPoint = rs.getInt("RemainPoint");
 			}

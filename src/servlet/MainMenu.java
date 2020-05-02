@@ -44,18 +44,23 @@ public class MainMenu extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		//ログインチェック
-		int errorNum = checkLoginInfo(request.getParameter("Id"), request.getParameter("Password"));
-		if (errorNum != 0) {
-			//画面のコントロールに値をセット
-			request.setAttribute("errorNum", String.valueOf(errorNum));
-			// LoginCheck.jsp にページ遷移
-			RequestDispatcher dispatch = request.getRequestDispatcher("LoginCheck.jsp");
-			dispatch.forward(request, response);
-			return;
+		//戻るフラグ取得
+		String backFlg = request.getParameter("backFlg");
+
+		//戻るフラグが1以外の場合、ログインチェックを実施
+		if (backFlg==null){
+			//ログインチェック
+			int errorNum = checkLoginInfo(request.getParameter("Id"), request.getParameter("Password"));
+			if (errorNum != 0) {
+				//画面のコントロールに値をセット
+				request.setAttribute("errorNum", String.valueOf(errorNum));
+				// LoginCheck.jsp にページ遷移
+				RequestDispatcher dispatch = request.getRequestDispatcher("LoginCheck.jsp");
+				dispatch.forward(request, response);
+				return;
+			}
 		}
 
-		String strId = request.getParameter("Id");
 		int userId = Integer.valueOf(request.getParameter("Id"));
 		selectUserData(request, userId);
 		// MainMenu にページ遷移
@@ -125,7 +130,6 @@ LABELCheck:{
 			request.setAttribute("UserName", UserName);
 			request.setAttribute("Point", String.valueOf(remainPoint));
 			request.setAttribute("Id", String.valueOf(inputId));
-
 
 		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
