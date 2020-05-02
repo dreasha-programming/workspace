@@ -49,4 +49,14 @@
     <servlet-name>MainMenu</servlet-name>
     <url-pattern>/MainMenu</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PointPutPage</display-name>
+    <servlet-name>PointPutPage</servlet-name>
+    <servlet-class>servlet.PointPutPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PointPutPage</servlet-name>
+    <url-pattern>/PointPutPage</url-pattern>
+  </servlet-mapping>
 </web-app>

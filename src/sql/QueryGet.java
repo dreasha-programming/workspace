@@ -9,10 +9,10 @@ import java.sql.SQLException;
 public class QueryGet {
 
 	/*
-	 * ユーザーデータを出力するメソッド
+	 * ユーザーIdをユーザー名から取得
 	 */
 	@SuppressWarnings("finally")
-	static public int selectUserDataByName(String userName) {
+	static public int selectUserIdByName(String userName) {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
@@ -37,7 +37,6 @@ public class QueryGet {
 				userId = rs.getInt("Id");
 			}
 
-
 		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
@@ -47,6 +46,84 @@ public class QueryGet {
 		}  finally {
 			return userId;
 		}
+	}
 
+	/*
+	 * ユーザーIdからユーザー名を取得
+	 */
+	@SuppressWarnings("finally")
+	static public String selectUserNameById(int userId) {
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select UserName from M_User where id = ?;";
+
+		String userName = "";
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			ps.setInt(1, userId);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				userName = rs.getString("UserName");
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return userName;
+		}
+	}
+
+	/*
+	 * ユーザーIdからポイントを取得
+	 */
+	@SuppressWarnings("finally")
+	static public int selectUserPoint(int userId) {
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select Point from M_User where Id = ?;";
+		int Point = 0;
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			ps.setInt(1, userId);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Point = rs.getInt("Point");
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return Point;
+		}
 	}
 }

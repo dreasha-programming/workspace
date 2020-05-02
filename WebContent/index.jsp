@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/PointF" method="post">
+<form action="<%=request.getContextPath()%>/MainMenu" method="post">
 	<p>UserId:<input type="text" name="Id"></p>
 	<input type="submit" value="Login"></input>
 </form>

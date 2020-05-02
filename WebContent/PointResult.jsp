@@ -15,8 +15,7 @@
 </head>
 <body>
 <%=UserName%> have <%=calcPoint%> points.
-
-<form action="<%=request.getContextPath()%>/PointF" method="post">
+<form action="<%=request.getContextPath()%>/MainMenu" method="post">
 	<input type="hidden" name="Id" value="<%=Id%>" />
 	<input type="submit" value="Back"></input>
 </form>

@@ -41,7 +41,6 @@ public class PointF extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		String strId = request.getParameter("Id");
 		int userId = Integer.valueOf(request.getParameter("Id"));
 		selectUserData(request, userId);
 		// Point にページ遷移
@@ -83,7 +82,6 @@ public class PointF extends HttpServlet {
 			request.setAttribute("UserName", UserName);
 			request.setAttribute("Point", String.valueOf(remainPoint));
 			request.setAttribute("Id", String.valueOf(inputId));
-
 
 		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
