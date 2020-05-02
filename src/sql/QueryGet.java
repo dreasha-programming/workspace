@@ -126,4 +126,47 @@ public class QueryGet {
 			return Point;
 		}
 	}
+
+	/*
+	 * ユーザーIdからパスワードを取得
+	 */
+	@SuppressWarnings("finally")
+	static public Boolean checkPassword(int userId, String strPassword) {
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select Password from M_User where Id = ?;";
+		String dbPassword = "";
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			ps.setInt(1, userId);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				dbPassword = rs.getString("Password");
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			if (strPassword.equals(dbPassword)) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
 }

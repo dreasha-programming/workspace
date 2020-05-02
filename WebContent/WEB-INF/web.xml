@@ -59,4 +59,10 @@
     <servlet-name>PointPutPage</servlet-name>
     <url-pattern>/PointPutPage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginCheck</display-name>
+    <servlet-name>LoginCheck</servlet-name>
+    <servlet-class>servlet.LoginCheck</servlet-class>
+  </servlet>
 </web-app>
