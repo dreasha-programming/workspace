@@ -65,4 +65,44 @@
     <servlet-name>LoginCheck</servlet-name>
     <servlet-class>servlet.LoginCheck</servlet-class>
   </servlet>
+  <servlet>
+    <description></description>
+    <display-name>M_UserInsert</display-name>
+    <servlet-name>M_UserInsert</servlet-name>
+    <servlet-class>servlet.M_UserInsert</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>M_UserInsert</servlet-name>
+    <url-pattern>/M_UserInsert</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>M_UserRegister</display-name>
+    <servlet-name>M_UserRegister</servlet-name>
+    <servlet-class>servlet.M_UserRegister</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>M_UserRegister</servlet-name>
+    <url-pattern>/M_UserRegister</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>M_UserUpdate</display-name>
+    <servlet-name>M_UserUpdate</servlet-name>
+    <servlet-class>servlet.M_UserUpdate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>M_UserUpdate</servlet-name>
+    <url-pattern>/M_UserUpdate</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>M_UserUpdate2</display-name>
+    <servlet-name>M_UserUpdate2</servlet-name>
+    <servlet-class>servlet.M_UserUpdate2</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>M_UserUpdate2</servlet-name>
+    <url-pattern>/M_UserUpdate2</url-pattern>
+  </servlet-mapping>
 </web-app>

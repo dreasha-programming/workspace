@@ -128,7 +128,7 @@ public class QueryGet {
 	}
 
 	/*
-	 * ユーザーIdからパスワードを取得
+	 * パスワードチェック
 	 */
 	@SuppressWarnings("finally")
 	static public Boolean checkPassword(int userId, String strPassword) {
@@ -167,6 +167,44 @@ public class QueryGet {
 			} else {
 				return false;
 			}
+		}
+	}
+	/*
+	 *  最新ID取得
+	 */
+	@SuppressWarnings("finally")
+	static public int selectLatestId() {
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select MAX(Id) + 1 as latestId from M_User;";
+
+		int latestId = 0;
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				latestId = rs.getInt("latestId");
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return latestId;
 		}
 	}
 }
