@@ -28,14 +28,30 @@ public class M_UserRegister extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//パラメータ受け取り
+		//更新区分取得
+		String InsUpdKbn = request.getParameter("InsUpdKbn");
+		//ID取得
 		int userId = Integer.valueOf(request.getParameter("userId"));
+
+		//エラーチェック
+		String strErrorMessage = CommonFunc.errorCheck(request.getParameter("userId"), request.getParameter("userName"), request.getParameter("password"),
+				request.getParameter("mailAddress"), request.getParameter("point"));
+		if (strErrorMessage!="") {
+			//画面にパラメータセット
+			request.setAttribute("userId", String.valueOf(userId));
+			request.setAttribute("errorMessage", strErrorMessage);
+			request.setAttribute("InsUpdKbn", InsUpdKbn);
+			//ページ遷移
+			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
+			dispatch.forward(request, response);
+			return;
+		}
+
+		//パラメータ受け取り
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String mailAddress = request.getParameter("mailAddress");
 		int point = Integer.valueOf(request.getParameter("point"));
-		String InsUpdKbn = request.getParameter("InsUpdKbn");
 
 		if (InsUpdKbn.equals("Insert")) {
 			//区分がInsertの場合
@@ -67,6 +83,4 @@ public class M_UserRegister extends HttpServlet {
 		dispatch.forward(request, response);
 
 	}
-
-
 }

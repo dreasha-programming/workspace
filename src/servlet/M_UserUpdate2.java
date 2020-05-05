@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sql.QueryGet;
+
 /**
  * Servlet implementation class M_UserUpdate2
  */
@@ -31,13 +33,26 @@ public class M_UserUpdate2 extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int userId = 0;
+		if (!request.getParameter("userId").equals("")) {
+			userId = Integer.valueOf(request.getParameter("userId"));
+		}
 		//パラメータ受け取り
-		int userId = Integer.valueOf(request.getParameter("userId"));
 		String userName = "";
 		String password = "";
 		String mailAddress = "";
 		int point = 0;
+		//IDチェック
+		if (QueryGet.selectUserNameById(userId).equals("")){
+			//画面にパラメータセット
+			request.setAttribute("userId", String.valueOf(userId));
+			request.setAttribute("errorMessage", "ID not found.");
+			request.setAttribute("InsUpdKbn", "Update");
+			//ページ遷移
+			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
+			dispatch.forward(request, response);
+			return;
+		}
 		//ユーザー情報を取得し画面にセット
 		selectUserInfo(userId, userName, password, mailAddress, point, request, response);
 	}

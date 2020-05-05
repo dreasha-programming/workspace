@@ -10,6 +10,12 @@
 <head>
 <meta charset="Shift_JIS">
 <title>M_User Insert</title>
+<style>
+table,th,td {
+  width: 200px;
+  border: 1px;
+}
+</style>
 </head>
 <body>
 <form action="<%=request.getContextPath()%>/M_UserRegister" method="post">
