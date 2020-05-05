@@ -34,6 +34,15 @@ public class M_UserUpdate2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userId = 0;
+		if (CommonFunc.isNumber(request.getParameter("userId"))==false) {
+			//画面にパラメータセット
+			request.setAttribute("errorMessage", "Id is wrong.(DataType Error)");
+			request.setAttribute("InsUpdKbn", "Update");
+			//ページ遷移
+			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
+			dispatch.forward(request, response);
+			return;
+		}
 		if (!request.getParameter("userId").equals("")) {
 			userId = Integer.valueOf(request.getParameter("userId"));
 		}
