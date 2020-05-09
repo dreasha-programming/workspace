@@ -26,6 +26,7 @@ table,th,td {
 	  <tr><td>Password</td><td><input type="text" name="password" value=""></td></tr>
 	  <tr><td>MailAddress</td><td><input type="text" name="mailAddress" value=""></td></tr>
 	  <tr><td>Point</td><td><input type="text" name="point" value=""></td></tr>
+	  <tr><td>Kengen</td><td><input type="text" name="kengen" value=""></td></tr>
 	</table>
 	<input type="hidden" name="userId" value="<%=latestId%>" />
 	<input type="submit" name="InsUpdKbn" value="Insert">&nbsp;&nbsp;&nbsp;

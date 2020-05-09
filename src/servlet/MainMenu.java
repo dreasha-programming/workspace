@@ -103,9 +103,10 @@ LABELCheck:{
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
 		String pass = "";
-		String sqlGet = "select UserName, Point from M_User where Id = ?;";
+		String sqlGet = "select UserName, Point, Kengen from M_User where Id = ?;";
 
 		String UserName = "";
+		String kengen = "";
 		int remainPoint = 0;
 
 		//変数定義
@@ -123,12 +124,14 @@ LABELCheck:{
 			while (rs.next()) {
 				UserName = rs.getString("UserName");
 				remainPoint = rs.getInt("Point");
+				kengen = rs.getString("Kengen");
 			}
 
 			//画面のコントロールに値をセット
 			request.setAttribute("UserName", UserName);
 			request.setAttribute("Point", String.valueOf(remainPoint));
 			request.setAttribute("Id", String.valueOf(inputId));
+			request.setAttribute("kengen", kengen);
 
 		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック

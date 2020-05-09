@@ -52,16 +52,17 @@ public class M_UserRegister extends HttpServlet {
 		String password = request.getParameter("password");
 		String mailAddress = request.getParameter("mailAddress");
 		int point = Integer.valueOf(request.getParameter("point"));
+		String kengen = request.getParameter("kengen");
 
 		if (InsUpdKbn.equals("Insert")) {
 			//区分がInsertの場合
 			//ユーザーマスタに登録
-			QueryMaster.insert_M_User(userId, userName, password, mailAddress, point);
+			QueryMaster.insert_M_User(userId, userName, password, mailAddress, point, kengen);
 
 		} else if (InsUpdKbn.equals("Update")) {
 			//区分がUpdateの場合
 			//ユーザーマスタ更新
-			QueryMaster.update_M_User(userId, userName, password, mailAddress, point);
+			QueryMaster.update_M_User(userId, userName, password, mailAddress, point, kengen);
 
 		} else if (InsUpdKbn.equals("Delete")){
 			//区分がDeleteの場合
@@ -77,6 +78,7 @@ public class M_UserRegister extends HttpServlet {
 		request.setAttribute("password", password);
 		request.setAttribute("mailAddress", mailAddress);
 		request.setAttribute("point", String.valueOf(point));
+		request.setAttribute("kengen", kengen);
 		request.setAttribute("InsUpdKbn", InsUpdKbn);
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserRegister.jsp");

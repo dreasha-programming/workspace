@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class QueryGet {
 
@@ -205,6 +207,113 @@ public class QueryGet {
 			e.printStackTrace();
 		}  finally {
 			return latestId;
+		}
+	}
+
+	@SuppressWarnings("finally")
+	static public List<String> getPointList(){
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select Point from M_User order by Id asc;";
+		List<String> retList = new ArrayList<String>();
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				retList.add(String.valueOf(rs.getInt("Point")));
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return retList;
+		}
+	}
+	@SuppressWarnings("finally")
+	static public List<String> getIdList(){
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select Id from M_User order by Id asc;";
+		List<String> retList = new ArrayList<String>();
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				retList.add(String.valueOf(rs.getInt("Id")));
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return retList;
+		}
+	}
+	/*
+	 *  最新ID取得
+	 */
+	@SuppressWarnings("finally")
+	static public int selectMaxPoint() {
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select MAX(Point) as maxPoint from M_User;";
+
+		int maxPoint = 0;
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				maxPoint = rs.getInt("maxPoint");
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return maxPoint;
 		}
 	}
 }

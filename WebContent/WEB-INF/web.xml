@@ -105,4 +105,34 @@
     <servlet-name>M_UserUpdate2</servlet-name>
     <url-pattern>/M_UserUpdate2</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PointGraph</display-name>
+    <servlet-name>PointGraph</servlet-name>
+    <servlet-class>servlet.PointGraph</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PointGraph</servlet-name>
+    <url-pattern>/PointGraph</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MasterMaintenance</display-name>
+    <servlet-name>MasterMaintenance</servlet-name>
+    <servlet-class>servlet.MasterMaintenance</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MasterMaintenance</servlet-name>
+    <url-pattern>/MasterMaintenance</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PointHistory</display-name>
+    <servlet-name>PointHistory</servlet-name>
+    <servlet-class>servlet.PointHistory</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PointHistory</servlet-name>
+    <url-pattern>/PointHistory</url-pattern>
+  </servlet-mapping>
 </web-app>

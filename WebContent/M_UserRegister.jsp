@@ -10,11 +10,18 @@
 	String password = (String) request.getAttribute("password");
 	String mailAddress = (String) request.getAttribute("mailAddress");
 	String point = (String) request.getAttribute("point");
+	String kengen = (String) request.getAttribute("kengen");
 	String InsUpdKbn = (String) request.getAttribute("InsUpdKbn");
 %>
 <head>
 <meta charset="Shift_JIS">
 <title>M_User Register</title>
+<style>
+table,th,td {
+  width: 200px;
+  border: 1px;
+}
+</style>
 </head>
 <body>
 <p><%=InsUpdKbn %> process complete!</p>
@@ -26,6 +33,7 @@
 	  <tr><td>Password</td><td><%=password%></td></tr>
 	  <tr><td>MailAddress</td><td><%=mailAddress%></td></tr>
 	  <tr><td>Point</td><td><%=point%></td></tr>
+	  <tr><td>Kengen</td><td><%=kengen%></td></tr>
 	</table>
 	<button onclick="location.href='./MasterMaintenance.jsp'">Back</button>
 </body>

@@ -50,6 +50,7 @@ public class M_UserUpdate2 extends HttpServlet {
 		String userName = "";
 		String password = "";
 		String mailAddress = "";
+		String kengen = "";
 		int point = 0;
 		//IDチェック
 		if (QueryGet.selectUserNameById(userId).equals("")){
@@ -63,19 +64,19 @@ public class M_UserUpdate2 extends HttpServlet {
 			return;
 		}
 		//ユーザー情報を取得し画面にセット
-		selectUserInfo(userId, userName, password, mailAddress, point, request, response);
+		selectUserInfo(userId, userName, password, mailAddress, point, kengen, request, response);
 	}
 
 	/*
 	 * ユーザー情報を取得
 	 */
-	private void selectUserInfo(int userId, String userName, String password, String mailAddress, int point, HttpServletRequest request, HttpServletResponse response)
+	private void selectUserInfo(int userId, String userName, String password, String mailAddress, int point, String kengen, HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
 		String pass = "";
-		String sqlGet = "select UserName, Password, MailAddress, Point from M_User where Id = ?;";
+		String sqlGet = "select UserName, Password, MailAddress, Point, Kengen from M_User where Id = ?;";
 
 		//変数定義
 		PreparedStatement ps = null;
@@ -95,6 +96,7 @@ public class M_UserUpdate2 extends HttpServlet {
 				password = rs.getString("Password");
 				mailAddress = rs.getString("MailAddress");
 				point = rs.getInt("Point");
+				kengen = rs.getString("Kengen");
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO 自動生成された catch ブロック
@@ -110,6 +112,7 @@ public class M_UserUpdate2 extends HttpServlet {
 		request.setAttribute("password", password);
 		request.setAttribute("mailAddress", mailAddress);
 		request.setAttribute("point", String.valueOf(point));
+		request.setAttribute("kengen", kengen);
 
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserUpdate2.jsp");
