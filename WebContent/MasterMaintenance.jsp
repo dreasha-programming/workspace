@@ -2,7 +2,8 @@
     pageEncoding="Shift_JIS"%>
 <!DOCTYPE html>
 <%
-	String Id = request.getParameter("Id");
+	String Id = (String) request.getAttribute("Id");
+	String userName = (String) request.getAttribute("userName");
 %>
 <html>
 <head>
@@ -10,12 +11,17 @@
 <title>Master Maintenance</title>
 </head>
 <body>
+Maintenance user : <%=userName %>
+<br>
+<br>
 <form method="POST" action="<%=request.getContextPath()%>/M_UserInsert" id="link1">
+<input type="hidden" name="Id" value="<%=Id%>" />
 <a href="about:blank" onclick="document.getElementById('link1').submit();return false;">M_User Insert</a>
 </form>
 <br>
 <br>
 <form method="POST" action="<%=request.getContextPath()%>/M_UserUpdate" id="link2">
+<input type="hidden" name="Id" value="<%=Id%>" />
 <a href="about:blank" onclick="document.getElementById('link2').submit();return false;">M_User Update</a>
 </form>
 <br>

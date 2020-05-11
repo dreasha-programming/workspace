@@ -12,13 +12,14 @@
 	String point = (String) request.getAttribute("point");
 	String kengen = (String) request.getAttribute("kengen");
 	String InsUpdKbn = (String) request.getAttribute("InsUpdKbn");
+	String Id = (String) request.getAttribute("Id");
 %>
 <head>
 <meta charset="Shift_JIS">
 <title>M_User Register</title>
 <style>
-table,th,td {
-  width: 200px;
+table th,td {
+  width: 100px;
   border: 1px;
 }
 </style>
@@ -35,6 +36,11 @@ table,th,td {
 	  <tr><td>Point</td><td><%=point%></td></tr>
 	  <tr><td>Kengen</td><td><%=kengen%></td></tr>
 	</table>
-	<button onclick="location.href='./MasterMaintenance.jsp'">Back</button>
+<br>
+<form action="<%=request.getContextPath()%>/MasterMaintenance" method="post">
+	<input type="hidden" name="Id" value="<%=Id%>" />
+	<input type="hidden" name="backFlg" value="1" />
+	<input type="submit" value="Back"></input>
+</form>
 </body>
 </html>

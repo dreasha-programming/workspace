@@ -245,12 +245,12 @@ public class QueryGet {
 		}
 	}
 	@SuppressWarnings("finally")
-	static public List<String> getIdList(){
+	static public List<String> getNameList(){
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
 		String pass = "";
-		String sqlGet = "select Id from M_User order by Id asc;";
+		String sqlGet = "select UserName from M_User order by Id asc;";
 		List<String> retList = new ArrayList<String>();
 
 		//変数定義
@@ -265,7 +265,7 @@ public class QueryGet {
 			//SELECTを実行する
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				retList.add(String.valueOf(rs.getInt("Id")));
+				retList.add(rs.getString("UserName"));
 			}
 
 		} catch (ClassNotFoundException e) {

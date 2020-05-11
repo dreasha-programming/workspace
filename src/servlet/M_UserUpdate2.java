@@ -34,10 +34,13 @@ public class M_UserUpdate2 extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userId = 0;
+		String Id = request.getParameter("Id");
+
 		if (CommonFunc.isNumber(request.getParameter("userId"))==false) {
 			//画面にパラメータセット
 			request.setAttribute("errorMessage", "Id is wrong.(DataType Error)");
 			request.setAttribute("InsUpdKbn", "Update");
+			request.setAttribute("Id", Id);
 			//ページ遷移
 			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
 			dispatch.forward(request, response);
@@ -58,19 +61,21 @@ public class M_UserUpdate2 extends HttpServlet {
 			request.setAttribute("userId", String.valueOf(userId));
 			request.setAttribute("errorMessage", "ID not found.");
 			request.setAttribute("InsUpdKbn", "Update");
+			request.setAttribute("Id", Id);
 			//ページ遷移
 			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
 			dispatch.forward(request, response);
 			return;
 		}
 		//ユーザー情報を取得し画面にセット
-		selectUserInfo(userId, userName, password, mailAddress, point, kengen, request, response);
+		selectUserInfo(userId, userName, password, mailAddress, point, kengen, request, response, Id);
 	}
 
 	/*
 	 * ユーザー情報を取得
 	 */
-	private void selectUserInfo(int userId, String userName, String password, String mailAddress, int point, String kengen, HttpServletRequest request, HttpServletResponse response)
+	private void selectUserInfo(int userId, String userName, String password, String mailAddress, int point, String kengen,
+			HttpServletRequest request, HttpServletResponse response, String Id)
 			throws ServletException, IOException {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
@@ -113,6 +118,7 @@ public class M_UserUpdate2 extends HttpServlet {
 		request.setAttribute("mailAddress", mailAddress);
 		request.setAttribute("point", String.valueOf(point));
 		request.setAttribute("kengen", kengen);
+		request.setAttribute("Id", Id);
 
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserUpdate2.jsp");

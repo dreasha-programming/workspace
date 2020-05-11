@@ -31,9 +31,11 @@ public class M_UserInsert extends HttpServlet {
 		// TODO Auto-generated method stub
 		//最新ID取得（MaxID＋１）
 		int latestId = QueryGet.selectLatestId();
+		String Id = request.getParameter("Id");	//ログインID
 
 		//画面にパラメータセット
 		request.setAttribute("latestId", String.valueOf(latestId));
+		request.setAttribute("Id", Id);
 
 		//ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserInsert.jsp");

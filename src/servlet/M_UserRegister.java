@@ -32,6 +32,7 @@ public class M_UserRegister extends HttpServlet {
 		String InsUpdKbn = request.getParameter("InsUpdKbn");
 		//ID取得
 		int userId = Integer.valueOf(request.getParameter("userId"));
+		String Id = request.getParameter("Id");	//ログインID
 
 		//エラーチェック
 		String strErrorMessage = CommonFunc.errorCheck(request.getParameter("userId"), request.getParameter("userName"), request.getParameter("password"),
@@ -41,6 +42,7 @@ public class M_UserRegister extends HttpServlet {
 			request.setAttribute("userId", String.valueOf(userId));
 			request.setAttribute("errorMessage", strErrorMessage);
 			request.setAttribute("InsUpdKbn", InsUpdKbn);
+			request.setAttribute("Id", Id);
 			//ページ遷移
 			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
 			dispatch.forward(request, response);
@@ -80,6 +82,7 @@ public class M_UserRegister extends HttpServlet {
 		request.setAttribute("point", String.valueOf(point));
 		request.setAttribute("kengen", kengen);
 		request.setAttribute("InsUpdKbn", InsUpdKbn);
+		request.setAttribute("Id", Id);
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserRegister.jsp");
 		dispatch.forward(request, response);

@@ -5,6 +5,7 @@
 	// Servlet‚Ìƒf[ƒ^Žó‚¯Žæ‚è
 	request.setCharacterEncoding("UTF8");
 	String latestId = (String) request.getAttribute("latestId");
+	String Id = (String) request.getAttribute("Id");
 %>
 <html>
 <head>
@@ -28,9 +29,15 @@ table,th,td {
 	  <tr><td>Point</td><td><input type="text" name="point" value=""></td></tr>
 	  <tr><td>Kengen</td><td><input type="text" name="kengen" value=""></td></tr>
 	</table>
+	<input type="hidden" name="Id" value="<%=Id%>" />
 	<input type="hidden" name="userId" value="<%=latestId%>" />
 	<input type="submit" name="InsUpdKbn" value="Insert">&nbsp;&nbsp;&nbsp;
 </form>
-<button onclick="location.href='./MasterMaintenance.jsp'">Back</button>
+<br>
+<form action="<%=request.getContextPath()%>/MasterMaintenance" method="post">
+	<input type="hidden" name="Id" value="<%=Id%>" />
+	<input type="hidden" name="backFlg" value="1" />
+	<input type="submit" value="Back"></input>
+</form>
 </body>
 </html>

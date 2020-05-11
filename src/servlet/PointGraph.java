@@ -34,12 +34,12 @@ public class PointGraph extends HttpServlet {
 		String id = (String) request.getParameter("Id");	//ログインID
 		//リストでポイント一覧取得
 		List<String> pointList = new ArrayList<String>();
-		List<String> idList = new ArrayList<String>();
+		List<String> nameList = new ArrayList<String>();
 		pointList = QueryGet.getPointList();
-		idList = QueryGet.getIdList();
+		nameList = QueryGet.getNameList();
 		//配列変換
 		String[] arrPoint = pointList.toArray(new String[pointList.size()]);
-		String[] arrId = idList.toArray(new String[idList.size()]);
+		String[] arrName = nameList.toArray(new String[nameList.size()]);
 		String[] arrDiff = new String[pointList.size()];
 		int i = 0;
 		int maxPoint = QueryGet.selectMaxPoint();
@@ -52,7 +52,7 @@ public class PointGraph extends HttpServlet {
 
 		//画面にパラメータセット
 		request.setAttribute("arrPoint", arrPoint);
-		request.setAttribute("arrId", arrId);
+		request.setAttribute("arrName", arrName);
 		request.setAttribute("arrDiff", arrDiff);
 		request.setAttribute("Id", id);
 		request.setAttribute("arrSize", String.valueOf(arrSize));

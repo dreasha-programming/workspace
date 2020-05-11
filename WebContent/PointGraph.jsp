@@ -5,7 +5,7 @@
 <%
 	// Servlet‚Ìƒf[ƒ^Žó‚¯Žæ‚è
 	String[] arrPoint = (String[]) request.getAttribute("arrPoint");
-	String[] arrId = (String[]) request.getAttribute("arrId");
+	String[] arrName = (String[]) request.getAttribute("arrName");
 	String[] arrDiff = (String[]) request.getAttribute("arrDiff");
 	String Id = (String) request.getAttribute("Id");
 	int arrSize = Integer.parseInt((String) request.getAttribute("arrSize"));
@@ -19,7 +19,7 @@
 <table>
 <% for (i = 0; i < arrSize; i++) {%>
     <tr>
-        <td>ID:<%=arrId[i] %>:</td>
+        <td><%=arrName[i] %>:</td>
         <%for (j=0;j<Integer.parseInt(arrPoint[i]);j++){ %>
         <td style="background-color: blue; font-size: 20px; width: 5px;" >&nbsp;</td>
         <%} %>

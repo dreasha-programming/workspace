@@ -26,7 +26,9 @@ public class M_UserUpdate extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//ID取得
+		String Id = request.getParameter("Id");
+		request.setAttribute("Id", Id);
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserUpdate.jsp");
 		dispatch.forward(request, response);

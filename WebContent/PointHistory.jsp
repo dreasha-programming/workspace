@@ -38,6 +38,18 @@ for(int i=0;i<maxArraySize;i++){
 </tr>
 <% }%>
 </table>
+<br>
+<form action="<%=request.getContextPath()%>/PointHistoryCSV" method="post">
+	<input type="hidden" name="Id" value="<%=Id%>" />
+	<input type="hidden" name="arrFromUserName" value="<%=arrFromUserName%>" />
+	<input type="hidden" name="arrToUserName" value="<%=arrToUserName%>" />
+	<input type="hidden" name="arrComment" value="<%=arrComment%>" />
+	<input type="hidden" name="arrPoint" value="<%=arrPoint%>" />
+	<input type="hidden" name="arrUketoriFlg" value="<%=arrUketoriFlg%>" />
+	<input type="hidden" name="arrUpdateDate" value="<%=arrUpdateDate%>" />
+	<input type="hidden" name=maxArraySize value="<%=maxArraySize%>" />
+	<input type="submit" value="OutputCSV"></input>
+</form>
 <form action="<%=request.getContextPath()%>/MainMenu" method="post">
 	<input type="hidden" name="Id" value="<%=Id%>" />
 	<input type="hidden" name="backFlg" value="1" />
