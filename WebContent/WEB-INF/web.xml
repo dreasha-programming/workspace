@@ -145,4 +145,14 @@
     <servlet-name>PointHistoryCSV</servlet-name>
     <url-pattern>/PointHistoryCSV</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SendMail</display-name>
+    <servlet-name>SendMail</servlet-name>
+    <servlet-class>servlet.SendMail</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendMail</servlet-name>
+    <url-pattern>/SendMail</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -129,6 +129,9 @@ LABELerror:{
 		request.setAttribute("UserName", QueryGet.selectUserNameById(Integer.parseInt(id)));
 		request.setAttribute("calcPoint", String.valueOf(calcPoint));
 		request.setAttribute("Id", id);
+		request.setAttribute("UketoriFlg", UketoriFlg);
+		request.setAttribute("txtPutPoint", txtPutPoint);
+		request.setAttribute("toUserId", String.valueOf(toUserId));
 
 		// PointResult にページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("PointResult.jsp");

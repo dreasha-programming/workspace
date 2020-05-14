@@ -216,7 +216,7 @@ public class QueryGet {
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
 		String pass = "";
-		String sqlGet = "select Point from M_User order by Id asc;";
+		String sqlGet = "select Point from M_User where Id <> 0 order by Id asc;";
 		List<String> retList = new ArrayList<String>();
 
 		//変数定義
@@ -250,7 +250,7 @@ public class QueryGet {
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
 		String pass = "";
-		String sqlGet = "select UserName from M_User order by Id asc;";
+		String sqlGet = "select UserName from M_User where Id <> 0 order by Id asc;";
 		List<String> retList = new ArrayList<String>();
 
 		//変数定義
@@ -279,7 +279,7 @@ public class QueryGet {
 		}
 	}
 	/*
-	 *  最新ID取得
+	 *  MAXポイント取得
 	 */
 	@SuppressWarnings("finally")
 	static public int selectMaxPoint() {
@@ -314,6 +314,83 @@ public class QueryGet {
 			e.printStackTrace();
 		}  finally {
 			return maxPoint;
+		}
+	}
+
+	/*
+	 * ユーザーIdからパスワードを取得
+	 */
+	@SuppressWarnings("finally")
+	static public String selectPasswordFromId(int userId) {
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select Password from M_User where Id = ?;";
+		String password = "";
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			ps.setInt(1, userId);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				password = rs.getString("Password");
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return password;
+		}
+	}
+	/*
+	 * ユーザーIdからメールアドレスを取得
+	 */
+	@SuppressWarnings("finally")
+	static public String selectMailAddressFromId(int userId) {
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = "";
+		String sqlGet = "select MailAddress from M_User where Id = ?;";
+		String mailAddress = "";
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			ps.setInt(1, userId);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				mailAddress = rs.getString("MailAddress");
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return mailAddress;
 		}
 	}
 }
