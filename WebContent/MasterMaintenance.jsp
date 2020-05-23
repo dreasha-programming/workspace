@@ -26,6 +26,12 @@ Maintenance user : <%=userName %>
 </form>
 <br>
 <br>
+<form method="POST" action="<%=request.getContextPath()%>/T_AccessLogCheck" id="link3">
+<input type="hidden" name="Id" value="<%=Id%>" />
+<a href="about:blank" onclick="document.getElementById('link3').submit();return false;">AccessLog Check</a>
+</form>
+<br>
+<br>
 <form action="<%=request.getContextPath()%>/MainMenu" method="post">
 	<input type="hidden" name="Id" value="<%=Id%>" />
 	<input type="hidden" name="backFlg" value="1" />

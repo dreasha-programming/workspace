@@ -123,6 +123,7 @@ public class SendMail extends HttpServlet {
     		//ページ遷移
     		RequestDispatcher dispatch = request.getRequestDispatcher("SendMail.jsp");
     		dispatch.forward(request, response);
+    		CommonFunc.insertAccessLog(Integer.valueOf(fromUserId), "SendMail.jsp");
         }
 
         out.close();

@@ -39,6 +39,11 @@ for(int i=0;i<maxArraySize;i++){
 <% }%>
 </table>
 <br>
+<form method="POST" action="<%=request.getContextPath()%>/csvDownload" id="link2">
+<input type="hidden" name="Id" value="<%=Id%>" />
+<button type="button" onclick="document.getElementById('link2').submit();return false;">CSV</button>
+</form>
+<!--
 <form action="<%=request.getContextPath()%>/PointHistoryCSV" method="post">
 	<input type="hidden" name="Id" value="<%=Id%>" />
 	<input type="hidden" name="arrFromUserName" value="<%=arrFromUserName%>" />
@@ -50,6 +55,7 @@ for(int i=0;i<maxArraySize;i++){
 	<input type="hidden" name=maxArraySize value="<%=maxArraySize%>" />
 	<input type="submit" value="OutputCSV"></input>
 </form>
+-->
 <form action="<%=request.getContextPath()%>/MainMenu" method="post">
 	<input type="hidden" name="Id" value="<%=Id%>" />
 	<input type="hidden" name="backFlg" value="1" />

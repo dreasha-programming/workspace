@@ -44,6 +44,7 @@ public class M_UserUpdate2 extends HttpServlet {
 			//ページ遷移
 			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
 			dispatch.forward(request, response);
+			CommonFunc.insertAccessLog(Integer.valueOf(Id), "ErrorPage.jsp");
 			return;
 		}
 		if (!request.getParameter("userId").equals("")) {
@@ -65,6 +66,7 @@ public class M_UserUpdate2 extends HttpServlet {
 			//ページ遷移
 			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
 			dispatch.forward(request, response);
+			CommonFunc.insertAccessLog(Integer.valueOf(Id), "ErrorPage.jsp");
 			return;
 		}
 		//ユーザー情報を取得し画面にセット
@@ -80,7 +82,7 @@ public class M_UserUpdate2 extends HttpServlet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select UserName, Password, MailAddress, Point, Kengen from M_User where Id = ?;";
 
 		//変数定義
@@ -123,5 +125,6 @@ public class M_UserUpdate2 extends HttpServlet {
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserUpdate2.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(Integer.valueOf(Id), "M_UserUpdate2.jsp");
 	}
 }

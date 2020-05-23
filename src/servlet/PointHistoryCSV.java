@@ -52,7 +52,7 @@ public class PointHistoryCSV extends HttpServlet {
 	String drv = "com.mysql.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 	String id = "root";
-	String pass = "";
+	String pass = CommonFunc.getDBPassword();
 	String sqlGet = "select FromUserId,ToUserId,Point,Comment,UketoriFlg,UpdateDate from T_PointHistory where FromUserId=? or ToUserId=?;";
 
 	//変数定義
@@ -130,6 +130,7 @@ public class PointHistoryCSV extends HttpServlet {
 	// ページ遷移
 	RequestDispatcher dispatch = request.getRequestDispatcher("PointHistory.jsp");
 	dispatch.forward(request, response);
+	CommonFunc.insertAccessLog(Integer.valueOf(userId), "PointHistoryCSV.jsp");
 	}
 
 	/*

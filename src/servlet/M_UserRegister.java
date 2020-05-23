@@ -46,6 +46,7 @@ public class M_UserRegister extends HttpServlet {
 			//ページ遷移
 			RequestDispatcher dispatch = request.getRequestDispatcher("ErrorPage.jsp");
 			dispatch.forward(request, response);
+			CommonFunc.insertAccessLog(Integer.valueOf(Id), "ErrorPage.jsp");
 			return;
 		}
 
@@ -86,6 +87,7 @@ public class M_UserRegister extends HttpServlet {
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserRegister.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(Integer.valueOf(Id), "M_UserRegister.jsp");
 
 	}
 }

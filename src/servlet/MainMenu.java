@@ -56,6 +56,7 @@ public class MainMenu extends HttpServlet {
 				// LoginCheck.jsp にページ遷移
 				RequestDispatcher dispatch = request.getRequestDispatcher("LoginCheck.jsp");
 				dispatch.forward(request, response);
+				CommonFunc.insertAccessLog(0, "LoginCheck.jsp");
 				return;
 			}
 		}
@@ -65,6 +66,7 @@ public class MainMenu extends HttpServlet {
 		// MainMenu にページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("MainMenu.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(userId, "MainMenu.jsp");
 	}
 
 	private int checkLoginInfo(String strId, String strPassword) {
@@ -102,7 +104,7 @@ LABELCheck:{
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select UserName, Point, Kengen from M_User where Id = ?;";
 
 		String UserName = "";

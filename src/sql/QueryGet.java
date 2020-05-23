@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import servlet.CommonFunc;
+
 public class QueryGet {
 
 	/*
@@ -18,7 +20,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select Id from M_User where UserName = ?;";
 
 		int userId = 0;
@@ -58,7 +60,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select UserName from M_User where id = ?;";
 
 		String userName = "";
@@ -98,7 +100,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select Point from M_User where Id = ?;";
 		int Point = 0;
 
@@ -137,7 +139,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select Password from M_User where Id = ?;";
 		String dbPassword = "";
 
@@ -179,7 +181,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select MAX(Id) + 1 as latestId from M_User;";
 
 		int latestId = 0;
@@ -210,12 +212,15 @@ public class QueryGet {
 		}
 	}
 
+	/*
+	 * ポイントリスト取得
+	 */
 	@SuppressWarnings("finally")
 	static public List<String> getPointList(){
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select Point from M_User where Id <> 0 order by Id asc;";
 		List<String> retList = new ArrayList<String>();
 
@@ -244,12 +249,16 @@ public class QueryGet {
 			return retList;
 		}
 	}
+
+	/*
+	 * 名前リスト取得
+	 */
 	@SuppressWarnings("finally")
 	static public List<String> getNameList(){
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select UserName from M_User where Id <> 0 order by Id asc;";
 		List<String> retList = new ArrayList<String>();
 
@@ -278,6 +287,7 @@ public class QueryGet {
 			return retList;
 		}
 	}
+
 	/*
 	 *  MAXポイント取得
 	 */
@@ -286,7 +296,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select MAX(Point) as maxPoint from M_User;";
 
 		int maxPoint = 0;
@@ -325,7 +335,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select Password from M_User where Id = ?;";
 		String password = "";
 
@@ -355,6 +365,7 @@ public class QueryGet {
 			return password;
 		}
 	}
+
 	/*
 	 * ユーザーIdからメールアドレスを取得
 	 */
@@ -363,7 +374,7 @@ public class QueryGet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String sqlGet = "select MailAddress from M_User where Id = ?;";
 		String mailAddress = "";
 
@@ -391,6 +402,47 @@ public class QueryGet {
 			e.printStackTrace();
 		}  finally {
 			return mailAddress;
+		}
+	}
+
+	/*
+	 * アクセスログスト取得
+	 */
+	@SuppressWarnings("finally")
+	static public List<String> getAccessLogList(){
+		String drv = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
+		String id = "root";
+		String pass = CommonFunc.getDBPassword();
+		String sqlGet = "select JspPage, DATE_FORMAT(AccessDate, '%Y%m') as YearMonth, COUNT(*) as CNT ";
+		sqlGet = sqlGet + "from T_AccessLog ";
+		sqlGet = sqlGet + "where JspPage not in ('MainMenu.jsp','MasterMaintenance.jsp') ";
+		sqlGet = sqlGet + "group by JspPage, DATE_FORMAT(AccessDate, '%Y%m') order by DATE_FORMAT(AccessDate, '%Y%m') asc;";
+		List<String> retList = new ArrayList<String>();
+
+		//変数定義
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			Class.forName(drv);
+			Connection con = DriverManager.getConnection(url, id, pass); //データベースに接続
+			//実行するSQL文とパラメータを指定する
+			ps = con.prepareStatement(sqlGet);
+			//SELECTを実行する
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				retList.add(rs.getString("JspPage") + "," + rs.getString("YearMonth") + "," + rs.getInt("CNT"));
+			}
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}  finally {
+			return retList;
 		}
 	}
 }

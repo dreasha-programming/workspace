@@ -60,6 +60,7 @@ public class PointGraph extends HttpServlet {
 		//ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("PointGraph.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(Integer.valueOf(id), "PointGraph.jsp");
 	}
 
 }

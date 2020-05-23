@@ -155,4 +155,24 @@
     <servlet-name>SendMail</servlet-name>
     <url-pattern>/SendMail</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>T_AccessLogCheck</display-name>
+    <servlet-name>T_AccessLogCheck</servlet-name>
+    <servlet-class>servlet.T_AccessLogCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>T_AccessLogCheck</servlet-name>
+    <url-pattern>/T_AccessLogCheck</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>csvDownload</display-name>
+    <servlet-name>csvDownload</servlet-name>
+    <servlet-class>servlet.csvDownload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>csvDownload</servlet-name>
+    <url-pattern>/csvDownload</url-pattern>
+  </servlet-mapping>
 </web-app>

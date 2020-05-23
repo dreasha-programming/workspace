@@ -40,6 +40,7 @@ public class M_UserInsert extends HttpServlet {
 		//ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserInsert.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(Integer.valueOf(Id), "M_UserInsert.jsp");
 	}
 
 }

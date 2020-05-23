@@ -32,6 +32,7 @@ public class M_UserUpdate extends HttpServlet {
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("M_UserUpdate.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(Integer.valueOf(Id), "M_UserUpdate.jsp");
 	}
 
 }

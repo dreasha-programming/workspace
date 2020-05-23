@@ -49,6 +49,6 @@ public class PointPutPage extends HttpServlet {
 		// PointPutPage.jsp にページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("PointPutPage.jsp");
 		dispatch.forward(request, response);
-
+		CommonFunc.insertAccessLog(Integer.valueOf(userId), "PointPutPage.jsp");
 	}
 }

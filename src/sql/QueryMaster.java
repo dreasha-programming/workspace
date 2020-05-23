@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import servlet.CommonFunc;
+
 public class QueryMaster {
 
 	/*
@@ -14,7 +16,7 @@ public class QueryMaster {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 
 		String sqlIns = "insert into M_User(Id, UserName, Password, MailAddress, Point, Kengen, UpdateDate)";
 		sqlIns = sqlIns + "values(?, ?, ?, ?, ?, ?, SYSDATE())";
@@ -53,7 +55,7 @@ public class QueryMaster {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 
 		String sqlIns = "update M_User set UserName=?, Password=?, MailAddress=?, Point=?, Kengen=?, UpdateDate=SYSDATE() ";
 		sqlIns = sqlIns + "where Id=?;";
@@ -92,7 +94,7 @@ public class QueryMaster {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 
 		String strSql = "delete from M_User where Id=? ";
 

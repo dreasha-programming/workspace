@@ -136,6 +136,7 @@ LABELerror:{
 		// PointResult にページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("PointResult.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(Integer.valueOf(id), "PointResult.jsp");
 	}
 
 	/*
@@ -145,7 +146,7 @@ LABELerror:{
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 
 		String sqlUpd = "update M_User set Point = ?, UpdateDate = SYSDATE() where Id = ?;";
 
@@ -177,7 +178,7 @@ LABELerror:{
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 
 		String sqlIns = "insert into T_PointHistory(FromUserId, ToUserId, Point, Comment, UpdateDate, UketoriFlg)";
 		sqlIns = sqlIns + "values(?, ?, ?, ?, SYSDATE(), ?)";
@@ -214,7 +215,7 @@ LABELerror:{
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 
 		String sqlUpd = "update T_PointHistory set UketoriFlg = 1, UpdateDate = SYSDATE() where ToUserId = ? and UketoriFlg = 0;";
 

@@ -46,6 +46,7 @@ public class MasterMaintenance extends HttpServlet {
 		// ページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("MasterMaintenance.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(Integer.valueOf(Id), "MasterMaintenance.jsp");
 	}
 
 }

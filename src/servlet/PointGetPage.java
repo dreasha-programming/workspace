@@ -49,6 +49,7 @@ public class PointGetPage extends HttpServlet {
 		// PointGetPage.jsp にページ遷移
 		RequestDispatcher dispatch = request.getRequestDispatcher("PointGetPage.jsp");
 		dispatch.forward(request, response);
+		CommonFunc.insertAccessLog(userId, "PointGetPage.jsp");
 	}
 
 	/*
@@ -58,7 +59,7 @@ public class PointGetPage extends HttpServlet {
 		String drv = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysql"; // DB URL
 		String id = "root";
-		String pass = "";
+		String pass = CommonFunc.getDBPassword();
 		String 	sqlGet = "select SUM(a.Point) as GetPoint, MAX(b.Point) as RemainPoint " ;
 				sqlGet = sqlGet + "from T_PointHistory a inner join M_User b on a.ToUserId = b.Id ";
 				sqlGet = sqlGet + "where a.ToUserId = ? and a.UketoriFlg = 0;";
